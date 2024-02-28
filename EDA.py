@@ -53,7 +53,7 @@ def main():
 
         lst = [col for col in df.columns]
         columns = random.choices(lst,k=3)
-        lstb = range(6)
+        lstb = list(range(6))
         for column in columns:
             st.write(f"### {column}")
             plot_type=random.choice(lstb)
