@@ -33,9 +33,9 @@ def main():
 
     # Read data into DataFrame
     try:
-        if uploaded_file.endswith("xlsx"):
+        if str(uploaded_file).endswith("xlsx"):
               df = pd.read_excel(uploaded_file)
-        elif uploaded_file.endswith("csv"):
+        elif str(uploaded_file).endswith("csv"):
             df = pd.read_csv(uploaded_file)
 
         # Display data summary
@@ -49,6 +49,7 @@ def main():
 
         # Automatic EDA: Common plots for each column
         for column in df.columns:
+          if column.lower().startswith("unnamed") or column.lower().startswith("date"):
             st.write(f"### {column}")
             if df[column].dtype in ['int64', 'float64']:
                 st.write(f"**Histogram**")
