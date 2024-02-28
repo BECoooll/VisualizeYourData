@@ -35,9 +35,9 @@ def main():
 
     # Read data into DataFrame
     try:
-        if str(uploaded_file).endswith("xlsx"):
+        try:
               df = pd.read_excel(uploaded_file)
-        elif str(uploaded_file).endswith("csv"):
+        except:
             df = pd.read_csv(uploaded_file)
 
         # Display data summary
@@ -53,10 +53,9 @@ def main():
 
         lst = [col for col in df.columns]
         columns = random.choices(lst,k=3)
-        lstb = [a for a in range(6)]
+        lstb = range(6)
         for column in columns:
             st.write(f"### {column}")
-
             plot_type=random.choice(lstb)
             lstb.remove(plot_type)
             if plot_type == 0:
@@ -93,6 +92,8 @@ def main():
 
 
         # Custom data visualization section
+        st.title("Custom data visualization")
+
         st.markdown('<div id="custom_viz"></div>', unsafe_allow_html=True)  # Placeholder for custom data visualization
 
         selected_columns = st.multiselect("Select columns to visualize", options=df.columns)
