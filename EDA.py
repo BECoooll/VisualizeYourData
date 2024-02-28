@@ -33,7 +33,10 @@ def main():
 
     # Read data into DataFrame
     try:
-        df = pd.read_excel(uploaded_file)
+        if uploaded_file.endswith("xlsx"):
+              df = pd.read_excel(uploaded_file)
+        elif uploaded_file.endswith("csv"):
+            df = pd.read_csv(uploaded_file)
 
         # Display data summary
         st.subheader("Data Summary")
