@@ -49,7 +49,7 @@ def main():
         i=1
         # Automatic EDA: Common plots for each column
         for column in df.columns:
-            while i<= 3:
+            if i<= 3:
               if  column.lower().startswith("unnamed") or  column.lower().startswith("date"):
                   pass
               else:
