@@ -49,7 +49,7 @@ def main():
 
         # Automatic EDA: Common plots for each column
         for column in df.columns:
-          if column.lower().startswith("unnamed") or column.lower().startswith("date"):
+          if not column.lower().startswith("unnamed") or not column.lower().startswith("date"):
             st.write(f"### {column}")
             if df[column].dtype in ['int64', 'float64']:
                 st.write(f"**Histogram**")
