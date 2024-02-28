@@ -46,24 +46,26 @@ def main():
 
         # Exploratory Data Analysis (EDA)
         st.subheader("Exploratory Data Analysis (EDA)")
-
+        i=1
         # Automatic EDA: Common plots for each column
         for column in df.columns:
-          if  column.lower().startswith("unnamed") or  column.lower().startswith("date"):
-              pass
-          else:
-            st.write(f"### {column}")
-            if df[column].dtype in ['int64', 'float64']:
-                st.write(f"**Histogram**")
-                fig = px.histogram(df, x=column, title=f"{column} Histogram")
-                st.plotly_chart(fig)
-                st.write(f"**Box Plot**")
-                fig = px.box(df, y=column, title=f"{column} Box Plot")
-                st.plotly_chart(fig)
-            elif df[column].dtype == 'object':
-                st.write(f"**Count Plot**")
-                fig = px.histogram(df, x=column)#, title=f"{column} Count Plot")
-                st.plotly_chart(fig)
+            while i<= 3:
+              if  column.lower().startswith("unnamed") or  column.lower().startswith("date"):
+                  pass
+              else:
+                i+=1
+                st.write(f"### {column}")
+                if df[column].dtype in ['int64', 'float64']:
+                    st.write(f"**Histogram**")
+                    fig = px.histogram(df, x=column, title=f"{column} Histogram")
+                    st.plotly_chart(fig)
+                    st.write(f"**Box Plot**")
+                    fig = px.box(df, y=column, title=f"{column} Box Plot")
+                    st.plotly_chart(fig)
+                elif df[column].dtype == 'object':
+                    st.write(f"**Count Plot**")
+                    fig = px.histogram(df, x=column)#, title=f"{column} Count Plot")
+                    st.plotly_chart(fig)
 
         # Custom data visualization section
         st.markdown('<div id="custom_viz"></div>', unsafe_allow_html=True)  # Placeholder for custom data visualization
