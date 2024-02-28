@@ -1,3 +1,5 @@
+import random
+
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -10,7 +12,7 @@ DEFAULT_FILE_PATH = "US_MarketSTock.csv"
 
 # Columns to advise user to remove
 COLUMNS_TO_REMOVE = ["id", "date"]
-
+warn_singular=False
 # Streamlit app
 def main():
     st.sidebar.title("DIJITA TECHNOLOGIES")
@@ -48,24 +50,47 @@ def main():
         st.subheader("Exploratory Data Analysis (EDA)")
         i=1
         # Automatic EDA: Common plots for each column
-        for column in df.columns:
-            if i<= 3:
-              if  column.lower().startswith("unnamed") or  column.lower().startswith("date"):
-                  pass
-              else:
-                i+=1
-                st.write(f"### {column}")
-                if df[column].dtype in ['int64', 'float64']:
-                    st.write(f"**Histogram**")
-                    fig = px.histogram(df, x=column, title=f"{column} Histogram")
-                    st.plotly_chart(fig)
-                    st.write(f"**Box Plot**")
-                    fig = px.box(df, y=column, title=f"{column} Box Plot")
-                    st.plotly_chart(fig)
-                elif df[column].dtype == 'object':
-                    st.write(f"**Count Plot**")
-                    fig = px.histogram(df, x=column)#, title=f"{column} Count Plot")
-                    st.plotly_chart(fig)
+
+        lst = [col for col in df.columns]
+        columns = random.choices(lst,k=3)
+        lstb = [a for a in range(6)]
+        for column in columns:
+            st.write(f"### {column}")
+
+            plot_type=random.choice(lstb)
+            lstb.remove(plot_type)
+            if plot_type == 0:
+                st.write(f"**Histogram**")
+                fig = px.histogram(df, x=column, title=f"{column} Histogram")
+                st.plotly_chart(fig)
+            elif plot_type == 1:
+                st.write(f"**Box Plot**")
+                fig = px.box(df, y=column, title=f"{column} Box Plot")
+                st.plotly_chart(fig)
+            elif plot_type == 2:
+                st.write(f"**Scatter Plot**")
+                fig = px.scatter(df, x=column, title=f"{column} Scatter Plot")
+                st.plotly_chart(fig)
+            elif plot_type == 3:
+                st.write(f"**Violin Plot**")
+                fig = px.violin(df, y=column, box=True, points="all", title=f"{column} Violin Plot")
+                st.plotly_chart(fig)
+
+            elif plot_type == 4:
+                st.write(f"**Hexbin Plot**")
+                fig = px.density_heatmap(df, x=column, y=column, title=f"{column} Hexbin Plot")
+                st.plotly_chart(fig)
+            elif plot_type == 5:
+                st.write(f"**Sunburst Plot**")
+                df_counts = df[column].value_counts().reset_index()
+                df_counts.columns = ['Category', 'Count']
+                fig = px.sunburst(df_counts, path=['Category'], values='Count', title=f"{column} Sunburst Plot")
+                st.plotly_chart(fig)
+            elif plot_type == 6:
+                st.write(f"**TreeMap")
+                fig = px.treemap(df, path=[column], title=f"{column} TreeMap")
+                st.plotly_chart(fig)
+
 
         # Custom data visualization section
         st.markdown('<div id="custom_viz"></div>', unsafe_allow_html=True)  # Placeholder for custom data visualization
