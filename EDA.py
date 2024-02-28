@@ -53,46 +53,40 @@ def main():
 
         lst = [col for col in df.columns]
         columns = random.choices(lst,k=3)
-        lstb = list(range(6))
+        lstb = [a for a in range(6)]
         for column in columns:
             st.write(f"### {column}")
+
             plot_type=random.choice(lstb)
             lstb.remove(plot_type)
-            if plot_type == 0:
+            if plot_type ==0:
                 st.write(f"**Histogram**")
                 fig = px.histogram(df, x=column, title=f"{column} Histogram")
                 st.plotly_chart(fig)
-            elif plot_type == 1:
+            elif plot_type ==1:
                 st.write(f"**Box Plot**")
                 fig = px.box(df, y=column, title=f"{column} Box Plot")
                 st.plotly_chart(fig)
-            elif plot_type == 2:
+            elif plot_type ==2:
                 st.write(f"**Scatter Plot**")
                 fig = px.scatter(df, x=column, title=f"{column} Scatter Plot")
                 st.plotly_chart(fig)
-            elif plot_type == 3:
+            elif plot_type ==3:
                 st.write(f"**Violin Plot**")
                 fig = px.violin(df, y=column, box=True, points="all", title=f"{column} Violin Plot")
                 st.plotly_chart(fig)
-
-            elif plot_type == 4:
+            elif plot_type ==4:
                 st.write(f"**Hexbin Plot**")
                 fig = px.density_heatmap(df, x=column, y=column, title=f"{column} Hexbin Plot")
                 st.plotly_chart(fig)
-            elif plot_type == 5:
-                st.write(f"**Sunburst Plot**")
-                df_counts = df[column].value_counts().reset_index()
-                df_counts.columns = ['Category', 'Count']
-                fig = px.sunburst(df_counts, path=['Category'], values='Count', title=f"{column} Sunburst Plot")
-                st.plotly_chart(fig)
-            elif plot_type == 6:
+            elif plot_type ==5:
                 st.write(f"**TreeMap")
                 fig = px.treemap(df, path=[column], title=f"{column} TreeMap")
                 st.plotly_chart(fig)
 
 
         # Custom data visualization section
-        st.title("Custom data visualization")
+        st.title("Custom Data Visualization")
 
         st.markdown('<div id="custom_viz"></div>', unsafe_allow_html=True)  # Placeholder for custom data visualization
 
