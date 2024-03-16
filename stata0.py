@@ -1,18 +1,18 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import stats
+from sklearn.cluster import KMeans
+from sklearn.decomposition import FactorAnalysis
 from sklearn.linear_model import LogisticRegression
 from lifelines import KaplanMeierFitter
 from statsmodels.formula.api import ols
 import statsmodels.api as sm
-import numpy as np
-from sklearn.cluster import KMeans
-from sklearn.impute import SimpleImputer
 from statsmodels.stats.anova import anova_lm
 from statsmodels.multivariate.manova import MANOVA
-from sklearn.decomposition import FactorAnalysis
+
 # Disable file uploader deprecation warning
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
@@ -89,44 +89,22 @@ def perform_regression(data, x_columns, y_column):
     return model.summary()
 
 # Function to perform factor analysis
-
-
-
+# Function to perform factor analysis
 def factor_analysis(data, num_factors):
-    # Convert boolean variables to numeric (0 or 1)
+    # Exclude datetime columns from factor analysis
+    numeric_data = data.select_dtypes(include=np.number)
+    if len(numeric_data.columns) == 0:
+        st.error("No numeric columns found for factor analysis.")
+        return
 
-    # Convert data to NumPy array
-    data_array = np.array(data)
-
-    # Ensure data is of type float64
-    data_float64 = data_array.astype(np.float64)
-
-    # Initialize FactorAnalysis model
     fa = FactorAnalysis(n_components=num_factors)
-
-    # Fit the model to the data
-    fa.fit(data_float64)
-
-    # Optionally, you can transform the data
-    transformed_data = fa.transform(data_float64)
-
-
-    st.write(transformed_data_)
+    fa.fit(numeric_data)
+    st.write(fa.components_)
 
 
 # Function to perform cluster analysis
 def cluster_analysis(data, num_clusters):
-    data_array = np.array(data)
-
-    # Initialize SimpleImputer to handle NaN values
-    imputer = SimpleImputer(strategy='mean')
-
-    # Impute NaN values with mean of the column
-    imputed_data = imputer.fit_transform(data_array)
-
-    # Initialize KMeans model
     kmeans = KMeans(n_clusters=num_clusters)
-
     kmeans.fit(data)
     labels = kmeans.labels_
 
@@ -153,15 +131,9 @@ def survival_analysis(data, time_column, event_column):
     st.write(kmf.survival_function_)
 
 # Function to perform MANOVA
-# Function to perform MANOVA
 def perform_manova(data, groups, dependent_vars):
-    # Convert dependent_vars to a string if it's a list
-    if isinstance(dependent_vars, list):
-        dependent_vars = " + ".join(dependent_vars)
-
-    manova = MANOVA.from_formula(f'{dependent_vars} ~ {groups}', data=data)
+    manova = MANOVA.from_formula(dependent_vars + '~' + groups, data=data)
     st.write(manova.mv_test())
-
 
 # Function to encode categorical variables
 def encode_categorical(data):

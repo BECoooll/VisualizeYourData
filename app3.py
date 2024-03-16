@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 
 # Set default file path
-DEFAULT_FILE_PATH = "orders.xlsx"
+DEFAULT_FILE_PATH = "default_data.xlsx"
 
 # Columns to advise user to remove
 COLUMNS_TO_REMOVE = ["id", "date"]
