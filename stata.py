@@ -73,7 +73,7 @@ def correlation_analysis(data):
     # Plot correlation heatmap
     st.subheader('Correlation Heatmap')
     fig, ax = plt.subplots()
-    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt=".2f", ax=ax)
+    sns.heatmap(corr_matrix, annot=False, cmap='coolwarm', fmt=".2f", ax=ax)
     st.pyplot(fig)
 
 # Function to perform regression analysis
