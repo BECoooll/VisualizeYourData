@@ -42,7 +42,7 @@ def main():
 
         # Display data summary
         st.subheader("Data Summary")
-        columns_to_remove = st.multiselect("Select columns to remove ： Sometimes, some variables are useless for data summary (e.g., Id).", options=df.columns, default=[col for col in COLUMNS_TO_REMOVE if col in df.columns], help="Consider removing columns like 'id', 'date', etc.")
+        columns_to_remove = st.multiselect("Select columns to remove：Sometimes, some variables are useless for data summary (e.g., Id).", options=df.columns, default=[col for col in COLUMNS_TO_REMOVE if col in df.columns], help="Consider removing columns like 'id', 'date', etc.")
         df_summary = df.drop(columns_to_remove, axis=1).describe()
         st.write(df_summary)
 
@@ -126,7 +126,7 @@ def main():
                 st.plotly_chart(fig)
 
     except Exception as e:
-        st.sidebar.error(f"Error: {e}")
+        st.error("The requested task cannot be performed due a specicity in the data. Please Contact us for more details")
 
     # Contact Us button
     contact_us_link = "https://www.dijitatech.com/"
@@ -134,6 +134,11 @@ def main():
         f'<a href="{contact_us_link}" style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; font-size: 16px; text-decoration: none; cursor: pointer;">Contact Us Now</a>',
         unsafe_allow_html=True
     )
+
+    for i in range(10):
+        st.sidebar.text('')
+    st.sidebar.image('logo/4.jpg', use_column_width=True, width=7000,
+                     caption='Scan the code QR to add our Wechat')
 
 def scroll_to_custom_visualization():
     st.write('<script>window.location.hash = "#custom_viz";</script>', unsafe_allow_html=True)
