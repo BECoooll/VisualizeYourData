@@ -286,9 +286,9 @@ def main():
                 unsafe_allow_html=True
             )
 
-            for i in range(10):
-                st.sidebar.text('')
-            st.sidebar.image('logo/4.jpg', use_column_width=True, width=7000,caption='Scan the code QR to add our Wechat')
+            # for i in range(10):
+            #     st.sidebar.text('')
+            # st.sidebar.image('logo/4.jpg', use_column_width=True, width=7000,caption='Scan the code QR to add our Wechat')
 
     except:
         st.error("The requested task cannot be performed due a specicity in the data. Please Contact us for more details")

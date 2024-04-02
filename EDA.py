@@ -135,10 +135,10 @@ def main():
         unsafe_allow_html=True
     )
 
-    for i in range(10):
-        st.sidebar.text('')
-    st.sidebar.image('logo/4.jpg', use_column_width=True, width=7000,
-                     caption='Scan the code QR to add our Wechat')
+    # for i in range(10):
+    #     st.sidebar.text('')
+    # st.sidebar.image('logo/4.jpg', use_column_width=True, width=7000,
+    #                  caption='Scan the code QR to add our Wechat')
 
 def scroll_to_custom_visualization():
     st.write('<script>window.location.hash = "#custom_viz";</script>', unsafe_allow_html=True)
