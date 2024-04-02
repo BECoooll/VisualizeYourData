@@ -131,7 +131,7 @@ def main():
     # Contact Us button
     contact_us_link = "https://www.dijitatech.com/"
     st.sidebar.markdown(
-        f'<a href="{contact_us_link}" style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; font-size: 16px; text-decoration: none; cursor: pointer;">https://www.dijitatech.com</a>',
+        f'<a href="{contact_us_link}" style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; font-size: 16px; text-decoration: none; cursor: pointer;">www.dijitatech.com</a>',
         unsafe_allow_html=True
     )
 
