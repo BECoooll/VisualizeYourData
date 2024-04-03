@@ -172,7 +172,7 @@ def encode_categorical(data):
 # Main function to run the Streamlit app
 def main():
 
-    st.title("Data ANALYSIS")
+    st.header("Data ANALYSIS")
     slider_value = st.sidebar.slider('Slider', 0, 100)
     # Sidebar logo
     st.sidebar.image('logo/Mockup.jpg', use_column_width=True)
