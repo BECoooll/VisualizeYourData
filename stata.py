@@ -179,16 +179,16 @@ def main():
     st.sidebar.text('')
 
     st.sidebar.title('Data Analysis Tool')
-    DEFAULT_FILE_PATH = "default_data.xlsx"
+    DEFAULT_FILE_PATH = "US_MarketSTock.csv"
     # File upload
     uploaded_file = st.sidebar.file_uploader("Upload CSV or Excel file", type=['csv', 'xlsx'])
     if uploaded_file is None:
         uploaded_file = DEFAULT_FILE_PATH
     # Load data
     try:
-        data = pd.read_excel(uploaded_file)
+        data = pd.read_csv(uploaded_file,on_bad_lines=False)
     except:
-        data = pd.read_csv(uploaded_file)
+        data = pd.read_excel(uploaded_file)
     try:
         if data is not None:
             # Display uploaded data
