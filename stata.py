@@ -186,7 +186,7 @@ def main():
         uploaded_file = DEFAULT_FILE_PATH
     # Load data
     # try:
-    data = pd.read_csv(uploaded_file,on_bad_lines=False)
+    data = pd.read_csv(uploaded_file,encoding='latin-1')
     # except:
     #     data = pd.read_excel(uploaded_file)
     try:
