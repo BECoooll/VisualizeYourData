@@ -291,7 +291,7 @@ def main():
             # st.sidebar.image('logo/4.jpg', use_column_width=True, width=7000,caption='Scan the code QR to add our Wechat')
 
     except:
-        st.error("The requested task cannot be performed due a specicity in the data. Please Contact us for more details")
+        st.error("The requested analysis result is not available at this time. Please Contact us")
 
 
     def scroll_to_custom_visualization():
