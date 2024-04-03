@@ -185,10 +185,10 @@ def main():
     if uploaded_file is None:
         uploaded_file = DEFAULT_FILE_PATH
     # Load data
-    try:
-        data = pd.read_csv(uploaded_file,on_bad_lines=False)
-    except:
-        data = pd.read_excel(uploaded_file)
+    # try:
+    data = pd.read_csv(uploaded_file,on_bad_lines=False)
+    # except:
+    #     data = pd.read_excel(uploaded_file)
     try:
         if data is not None:
             # Display uploaded data
